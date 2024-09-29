@@ -26,7 +26,7 @@ namespace Hospital_Management_System
             Gender gen =gender;
           
         }
-        public void DisplayInfo()
+        public virtual void DisplayInfo()
         {
             Console.WriteLine($" Name: {Name}\n Age:{Age} \nGender: {gen}");
         }
