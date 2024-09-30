@@ -17,5 +17,33 @@ namespace Hospital_Management_System
             this.DoctorsList = DoctorsLis;
         
         }
+        public void AddDoctor (Doctor doctor)
+        {
+            DoctorsList.Add(doctor);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("doctor added");
+        }
+        public void AddPatient(Patient patient)
+        {
+
+            PatientsList.Add(patient);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Patient added");
+        }
+        public void AssignRoomToPatient(Patient patient, Room room) {
+
+            patient.AssignRoom(room);
+
+
+        }
+        public void  GetDoctorPatients(Doctor doctor)
+        {
+            Console.WriteLine($"doctor name: {doctor.Name}");
+            foreach(Patient d in doctor.PatientsList)
+            {
+                Console.WriteLine($"Patient Name {d.Name}\n Patient Id {d.PatientID}");
+            }
+           
+        }
     }
 }
