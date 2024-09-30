@@ -11,7 +11,7 @@ namespace Hospital_Management_System
     {
         public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
-        public DateTime AppointmentDate;
+        public DateTime? AppointmentDate;
         public Appointment(Patient Patient, Doctor Doctor, DateTime AppointmentDate)
         {
             this.Patient = Patient;
@@ -26,8 +26,9 @@ namespace Hospital_Management_System
         }
         public void CancelAppointment(DateTime date) {
 
-
-            AppointmentDate = date;
+            this.Patient = null;
+            this.Doctor = null;
+            AppointmentDate = null;
             Console.WriteLine($"Patient's Name:{Patient.Name} Doctor' Name: {Doctor.Name}  Appointment Date: {AppointmentDate}");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Canceled");
