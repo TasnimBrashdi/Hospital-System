@@ -22,7 +22,7 @@ namespace Hospital_Management_System
         public void ScheduleAppointment(DateTime date)
         {
             AppointmentDate = date;
-            Console.WriteLine($"Patient's Name:{Patient.Name} Doctor' Name: {Doctor.Name}  Appointment Date: {AppointmentDate}");
+
         }
         public void CancelAppointment(DateTime date) {
 
