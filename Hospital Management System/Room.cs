@@ -22,6 +22,17 @@ namespace Hospital_Management_System
             this.R = R; 
             this.IsOccupied = IsOccupied;
             }
+        public void OccupyRoom(bool IsOccupied)
+        {
+            IsOccupied=true;
+            Console.WriteLine($"Room {RoomNumber} is occupied:{IsOccupied}");
+
+        }
+        public void VacateRoom(bool IsOccupied)
+        {
+            IsOccupied = false;
+            Console.WriteLine($"Room {RoomNumber} is occupied:{IsOccupied}");
+        }
 
     }
 }
