@@ -19,6 +19,22 @@ namespace Hospital_Management_System
             this.Specialization = Specialization;
 
         }
-    
+        public void AddPatient(Patient patient)
+        {
+
+            PatientsList.Add(patient);
+            Console.WriteLine("Patient added");
+        }
+        public void RemovePatient(Patient patient) {
+            
+            PatientsList.Remove(patient);
+        }
+        public override void  DisplayInfo() {
+            base.DisplayInfo();
+            Console.WriteLine($"Doctor Id : {DoctorID} Specialization: {Specialization}");
+
+        }
+
+
     }
 }
