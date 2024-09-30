@@ -10,10 +10,13 @@ namespace Hospital_Management_System
     {
         public int DoctorID;
         public string Specialization;
-     ///continus
-        public Doctor(string Name, int age, Gender gender, int PatientID, string Ailment, Doctor AssignedDoctor, Room Room) : base(Name, age, gender)
+        public List<Patient> PatientsList;
+   
+        public Doctor(string Name, int age, Gender gender, int DoctorID, string Specialization, List<Patient> PatientsList) : base(Name, age, gender)
         {
-          
+            this.PatientsList = PatientsList;
+            this.DoctorID = DoctorID;
+            this.Specialization = Specialization;
 
         }
     
