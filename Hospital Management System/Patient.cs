@@ -21,16 +21,18 @@ namespace Hospital_Management_System
         }
         public void AssignRoom(Room Room)
         {
-            
+            this.Room = Room;
+            Console.WriteLine($"Room: {Room} Patient: {Name}");
 
         }
         public void Discharge()
         {
             Room = null;
         }
-        public  void DisplayInfo(int PatientID, string Ailment)
+        public override void DisplayInfo()
         {
-
+            base.DisplayInfo();
+            Console.WriteLine($"Patient Id : {PatientID} Ailment: {Ailment}");
         }
 
     }
