@@ -26,8 +26,15 @@ namespace Hospital_Management_System
             Console.WriteLine("Patient added");
         }
         public void RemovePatient(Patient patient) {
-            
-            PatientsList.Remove(patient);
+            if (PatientsList.Contains(patient))
+            {
+                PatientsList.Remove(patient);
+                Console.WriteLine($"{patient.Name} Removed");
+
+            }
+            else {
+                Console.WriteLine("Patient not found");
+            }
         }
         public override void  DisplayInfo() {
             base.DisplayInfo();
