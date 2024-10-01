@@ -25,6 +25,33 @@ namespace Hospital_Management_System
             this.Special = Special;
 
         }
+        public void  AssignToClinic (Clinic clinic, DateTime day, TimeSpan period)
+        {
+            if (!AssignedClinics.Contains(clinic))
+            {
+                AssignedClinics.Add(clinic);
+                Console.WriteLine("Clinic added");
+            }
+
+            if (!clinic.AvailableAppointments.ContainsKey(this))
+            {
+                clinic.AvailableAppointments[this] = new List<Appointment>();
+            }
+
+            for (int i = 0; i < 8; i++) // Assume 8 hourly slots
+            {
+                DateTime appointmentDateTime = day.Date + period.Add(TimeSpan.FromHours(i));
+                clinic.AvailableAppointments[this].Add(new Appointment(null, this, appointmentDateTime));
+            }
+        }
+        public void DisplayAssignedClinics()
+        {
+            Console.WriteLine($"Assigned Clinics for Dr. {Name}:");
+            foreach (var clinic in AssignedClinics)
+            {
+                Console.WriteLine(clinic.ClinicName);
+            }
+        }
         public void AddPatient(Patient patient)
         {
 
@@ -32,6 +59,7 @@ namespace Hospital_Management_System
             Console.WriteLine("Patient added");
         }
         public void RemovePatient(Patient patient) {
+
             if (PatientsList.Contains(patient))
             {
                 PatientsList.Remove(patient);
