@@ -9,14 +9,20 @@ namespace Hospital_Management_System
     public class Doctor : person
     {
         public int DoctorID;
-        public string Specialization;
+
+        public Specialization Special { get; set; }
+        public enum Specialization
+        {
+            Cardiology, Neurology, Dermatology
+        }
         public List<Patient> PatientsList;
+        public List<Clinic> AssignedClinics;
    
-        public Doctor(int DoctorID, string Name, int age, Gender gender, string Specialization) : base(Name, age, gender)
+        public Doctor(int DoctorID, string Name, int age, Gender gender, Specialization Special) : base(Name, age, gender)
         {
        
             this.DoctorID = DoctorID;
-            this.Specialization = Specialization;
+            this.Special = Special;
 
         }
         public void AddPatient(Patient patient)
@@ -38,7 +44,7 @@ namespace Hospital_Management_System
         }
         public override void  DisplayInfo() {
             base.DisplayInfo();
-            Console.WriteLine($"Doctor Id : {DoctorID} Specialization: {Specialization}");
+            Console.WriteLine($"Doctor Id : {DoctorID} Specialization: {Special}");
 
         }
 
