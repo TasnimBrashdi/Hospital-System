@@ -12,7 +12,7 @@ namespace Hospital_Management_System
         public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
         public DateTime? AppointmentDate;
-        public TimeSpan AppointmentTime;
+        public TimeSpan? AppointmentTime;
         public bool IsBooked { get; set; }
         public Appointment(Patient Patient, Doctor Doctor, DateTime AppointmentDate)
         {
@@ -21,13 +21,14 @@ namespace Hospital_Management_System
             this.AppointmentDate = AppointmentDate;
     
         }
-        public void ScheduleAppointment(DateTime date)
+        public void ScheduleAppointment(DateTime appointmentDate, TimeSpan appointmentTime)
         {
-            AppointmentDate = date;
+            AppointmentDate = appointmentDate;
+            AppointmentTime = appointmentTime;  
             IsBooked = true;
 
         }
-        public void CancelAppointment(DateTime date) {
+        public void CancelAppointment(DateTime appointmentDate, TimeSpan appointmentTime) {
 
             if (Patient != null && Doctor != null)
             {
@@ -44,14 +45,15 @@ namespace Hospital_Management_System
             Patient = null;
             Doctor = null;
             AppointmentDate = null;
+            AppointmentTime=null; 
             IsBooked = false;
 
         }
-        public void GetAppointmentDetails()
+        public void DisplayAppointmentDetails() 
         {
             if (IsBooked)
             {
-                Console.WriteLine($"Patient's Name: {Patient?.Name}, Doctor's Name: {Doctor?.Name}, Appointment Date: {AppointmentDate}");
+                Console.WriteLine($"Patient's Name: {Patient?.Name}, Appointment Date: {AppointmentDate} Appointment time: {AppointmentTime} ");
             }
             else
             {
