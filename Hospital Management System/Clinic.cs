@@ -32,8 +32,21 @@ namespace Hospital_Management_System
         }
         public void AddAvailableAppointment(Doctor doctor, DateTime appointmentDay, TimeSpan period)
         {
-         
-        
+            // Assuming you want to add a new appointment without the time span for simplicity
+            Appointment newAppointment = new Appointment(null, doctor, appointmentDay);
+
+            // Check if the doctor already has a list of appointments
+            if (AvailableAppointments.ContainsKey(doctor))
+            {
+                // If the doctor exists, add the new appointment to their list
+                AvailableAppointments[doctor].Add(newAppointment);
+            }
+            else
+            {
+                // If the doctor does not exist, create a new list and add the appointment
+                AvailableAppointments[doctor] = new List<Appointment> { newAppointment };
+            }
+
         }
     }
    
