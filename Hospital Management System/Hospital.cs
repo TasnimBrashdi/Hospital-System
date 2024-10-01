@@ -32,7 +32,7 @@ namespace Hospital_Management_System
         }
         public void AssignRoomToPatient(Patient patient, Room room) {
 
-            patient.AssignRoom(room);
+            //patient.AssignRoom(room);
 
 
         }

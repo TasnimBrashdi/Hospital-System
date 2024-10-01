@@ -41,8 +41,8 @@ namespace Hospital_Management_System
             Console.WriteLine("\n===== Test Case 4: Discharge Patients =====");
             patient1.Discharge();
             Console.WriteLine($"Patient {patient1.Name} has been discharged. Room { room1.RoomNumber} is now occupied: { room1.IsOccupied}");
- // Test Case 5: Display doctor-patient details
- Console.WriteLine("\n===== Test Case 5: Display Doctor-Patient Details =====");
+             // Test Case 5: Display doctor-patient details
+            Console.WriteLine("\n===== Test Case 5: Display Doctor-Patient Details =====");
             doctor1.DisplayInfo();
             doctor2.DisplayInfo();
         }
