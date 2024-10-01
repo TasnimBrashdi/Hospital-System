@@ -9,12 +9,13 @@ namespace Hospital_Management_System
     public class Room
     {
         public int RoomNumber { get; set; }
+        public bool IsOccupied { get; set; }
         public RoomType R { get; set; }
         public enum RoomType
         {
-            General, ICU, OperationTheater
+            IPR, OPR
         }
-        public bool IsOccupied { get; set; }
+   
         
         public Room(int RoomNumber, RoomType R)
         {
@@ -32,6 +33,11 @@ namespace Hospital_Management_System
         {
             IsOccupied = false;
 
+        }
+        public void DisplayRoomInfo()
+        {
+            Console.WriteLine(" - - - Room Information - - - ");
+            Console.WriteLine($"Room Number: {RoomNumber} \nRoom Type: {R} \nIs Occupied ? {IsOccupied}");
         }
 
     }
