@@ -26,5 +26,15 @@ namespace Hospital_Management_System
             this.Rooms = Rooms;
             this.AvailableAppointments = AvailableAppointments;
         }
+        public void AddRoom(Room room)
+        {
+            Rooms.Add(room);
+        }
+        public void AddAvailableAppointment(Doctor doctor, DateTime appointmentDay, TimeSpan period)
+        {
+         
+        
+        }
     }
+   
 }
