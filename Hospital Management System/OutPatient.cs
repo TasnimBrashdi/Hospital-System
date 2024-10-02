@@ -10,10 +10,11 @@ namespace Hospital_Management_System
     public class OutPatient :Patient
     {
         public Clinic ClinicAssigned { get; set; }
-        //private Clinic _clinic;
+    
         public OutPatient( string Name, int age, Gender gender, int PatientID, string Ailment, Clinic ClinicAssigned) : base(PatientID, Name, age, gender, Ailment)
         {
             this.ClinicAssigned = ClinicAssigned;
+       
 
         }
         public override void DisplayInfo()
@@ -33,7 +34,7 @@ namespace Hospital_Management_System
                     {
                         if (appointment.Patient == this && appointment.IsBooked)
                         {
-                            Console.WriteLine($"Appointment with Dr. {doctor.Name} on {appointment.AppointmentDate}");
+                            Console.WriteLine($"Appointment with {doctor.Name} on {appointment.AppointmentDate}");
                         }
                     }
                 }

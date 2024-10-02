@@ -41,6 +41,7 @@ namespace Hospital_Management_System
             {
                 // If the doctor exists, add the new appointment to their list
                 AvailableAppointments[doctor].Add(newAppointment);
+                Console.WriteLine($"Availble appointment added for {doctor.Name} at {appointmentDay}");
             }
             else
             {
@@ -49,7 +50,7 @@ namespace Hospital_Management_System
             }
 
         }
-        public void BookAppointment(Clinic clinic, Patient patient, Doctor doctor, DateTime appointmentDay,TimeSpan appointmentTime)
+        public void BookAppointment(Patient patient, Doctor doctor, DateTime appointmentDay,TimeSpan appointmentTime)
         {
             if (!AvailableAppointments.ContainsKey(doctor))
             {
@@ -67,7 +68,7 @@ namespace Hospital_Management_System
                 availableAppointment.Patient = patient;
                 availableAppointment.ScheduleAppointment(appointmentDay, appointmentTime);
                 //clinic.BookAppointment(this, patient, doctor, appointmentDay, appointmentTime);
-                Console.WriteLine($"Appointment booked for {patient.Name} with Dr. {doctor.Name} on {appointmentDay.ToShortDateString()} at {appointmentTime}.");
+                Console.WriteLine($"Appointment booked for {patient.Name} with  {doctor.Name} on {appointmentDay.ToShortDateString()} at {appointmentTime}.");
             }
         }
         public void DisplayAvailableAppointments()
@@ -76,7 +77,7 @@ namespace Hospital_Management_System
             {
                 Doctor doctor = doctorAppointments.Key;
                 List<Appointment> appointments = doctorAppointments.Value;
-                Console.WriteLine($"Available Appointments for Dr. {doctor.Name}:");
+                Console.WriteLine($"Available Appointments for {doctor.Name}:");
                 foreach (var appointment in appointments)
                 {
                     if (!appointment.IsBooked)

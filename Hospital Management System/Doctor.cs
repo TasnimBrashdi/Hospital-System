@@ -30,6 +30,7 @@ namespace Hospital_Management_System
         }
         public void  AssignToClinic (Clinic clinic, DateTime day, TimeSpan period)
         {
+           
             if (AssignedClinics == null)
             {
                 AssignedClinics = new List<Clinic>();
@@ -38,26 +39,34 @@ namespace Hospital_Management_System
             if (!AssignedClinics.Contains(clinic))
             {
                 AssignedClinics.Add(clinic);
+              
                 clinic.AddAvailableAppointment(this, day, period);
-                Console.WriteLine($"Doctor {Name} assigned to {clinic.ClinicName} for {day} from {period} hours.");
+          
             }
 
             if (!clinic.AvailableAppointments.ContainsKey(this))
             {
                 clinic.AvailableAppointments[this] = new List<Appointment>();
             }
-            for (int i = 0; i < 8; i++)  
+            DateTime startTime = day.Date.AddHours(9);
+            DateTime endTime = startTime.Add(period);
+         
+            Console.WriteLine($"Doctor: {Name} is assigned to the {clinic.ClinicName} for {day:MMMM d, yyyy}, {startTime:hh:mm tt} to {endTime:hh:mm tt}.");
+        
+            for (int i = 0; i < 8; i++)  // Create 8 appointments for 9 AM
             {
-                DateTime appointmentDateTime = day.Date + period.Add(TimeSpan.FromHours(i));
+                DateTime appointmentDateTime = startTime.AddHours(i); // Increment by 1 hour
                 clinic.AvailableAppointments[this].Add(new Appointment(null, this, appointmentDateTime));
             }
+         
         }
         public void DisplayAssignedClinics()
         {
-            Console.WriteLine($"Assigned Clinics for Dr. {Name}:");
+           
             foreach (var clinic in AssignedClinics)
             {
-                Console.WriteLine(clinic.ClinicName);
+                Console.WriteLine($"Assigned Clinics for {Name}: {clinic.ClinicName}");
+                Console.WriteLine();
             }
         }
         public void AddPatient(Patient patient)
