@@ -12,7 +12,7 @@ namespace Hospital_Management_System
         public Room Room { get; set; }
         public Doctor AssignedDoctor { get; set; }
         public DateTime AdmissionDate { get; set; }
-        public InPatient(int PatientID, string Name, int age, Gender gender, string Ailment, Doctor AssignedDoctor, Room Room, DateTime AdmissionDate) : base(PatientID, Name, age, gender, Ailment)
+        public InPatient( string Name, int age, Gender gender, int PatientID,  string Ailment, Doctor AssignedDoctor, DateTime AdmissionDate) : base(PatientID, Name, age, gender, Ailment)
         {
             this.Room = Room;
             this.AssignedDoctor = AssignedDoctor;

@@ -23,22 +23,30 @@ namespace Hospital_Management_System
        
             this.DoctorID = DoctorID;
             this.Special = Special;
+            AssignedClinics = new List<Clinic>(); 
+            PatientsList = new List<Patient>(); 
+
 
         }
         public void  AssignToClinic (Clinic clinic, DateTime day, TimeSpan period)
         {
+            if (AssignedClinics == null)
+            {
+                AssignedClinics = new List<Clinic>();
+            }
+
             if (!AssignedClinics.Contains(clinic))
             {
                 AssignedClinics.Add(clinic);
-                Console.WriteLine("Clinic added");
+                clinic.AddAvailableAppointment(this, day, period);
+                Console.WriteLine($"Doctor {Name} assigned to {clinic.ClinicName} for {day} from {period} hours.");
             }
 
             if (!clinic.AvailableAppointments.ContainsKey(this))
             {
                 clinic.AvailableAppointments[this] = new List<Appointment>();
             }
-
-            for (int i = 0; i < 8; i++) // Assume 8 hourly slots
+            for (int i = 0; i < 8; i++)  
             {
                 DateTime appointmentDateTime = day.Date + period.Add(TimeSpan.FromHours(i));
                 clinic.AvailableAppointments[this].Add(new Appointment(null, this, appointmentDateTime));

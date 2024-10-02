@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Hospital_Management_System
 {
@@ -10,8 +11,8 @@ namespace Hospital_Management_System
     {
         public int ClinicID { get; set; }
         public string ClinicName { get; set; }
-        public Specialization Special { get; set; }
-        public enum Specialization
+        public Specializations Special { get; set; }
+        public enum Specializations
         {
             Cardiology, Neurology, Dermatology
         }
@@ -19,12 +20,12 @@ namespace Hospital_Management_System
         public Dictionary<Doctor, List<Appointment>> AvailableAppointments;
 
 
-        public Clinic(int ClinicID, string ClinicName, Specialization Special, List<Room> Rooms, Dictionary<Doctor, List<Appointment>> AvailableAppointments) {
+        public Clinic(int ClinicID, string ClinicName, Specializations Special) {
         this.ClinicID = ClinicID;
         this.ClinicName = ClinicName;
             this.Special = Special;
-            this.Rooms = Rooms;
-            this.AvailableAppointments = AvailableAppointments;
+            Rooms = new List<Room>();
+            AvailableAppointments = new Dictionary<Doctor, List<Appointment>>(); ;
         }
         public void AddRoom(Room room)
         {
@@ -48,7 +49,7 @@ namespace Hospital_Management_System
             }
 
         }
-        public void BookAppointment(Patient patient, Doctor doctor, DateTime appointmentDay,TimeSpan appointmentTime)
+        public void BookAppointment(Clinic clinic, Patient patient, Doctor doctor, DateTime appointmentDay,TimeSpan appointmentTime)
         {
             if (!AvailableAppointments.ContainsKey(doctor))
             {
@@ -65,6 +66,7 @@ namespace Hospital_Management_System
             {
                 availableAppointment.Patient = patient;
                 availableAppointment.ScheduleAppointment(appointmentDay, appointmentTime);
+                //clinic.BookAppointment(this, patient, doctor, appointmentDay, appointmentTime);
                 Console.WriteLine($"Appointment booked for {patient.Name} with Dr. {doctor.Name} on {appointmentDay.ToShortDateString()} at {appointmentTime}.");
             }
         }

@@ -1,4 +1,6 @@
-﻿using static Hospital_Management_System.person;
+﻿using static Hospital_Management_System.Clinic;
+using static Hospital_Management_System.Doctor;
+using static Hospital_Management_System.person;
 using static Hospital_Management_System.Room;
 
 namespace Hospital_Management_System
@@ -7,44 +9,50 @@ namespace Hospital_Management_System
     {
         static void Main(string[] args)
         {
-            // Test Case 1: Create doctors and patients
-            Console.WriteLine("===== Test Case 1: Create Doctors and Patients =====");
-            Doctor doctor1 = new Doctor(1, "Dr. Smith", 45, Gender.Male, "Cardiology");
-            Doctor doctor2 = new Doctor(2, "Dr. Brown", 38, Gender.Female, "Neurology");
-            Patient patient1 = new Patient(101, "John Doe", 30, Gender.Male, "Heart Disease", doctor1);
-            Patient patient2 = new Patient(102, "Jane Roe", 28, Gender.Female, "Migraine", doctor2);
-            // Display information
-            patient1.DisplayInfo();
-            patient2.DisplayInfo();
-            doctor1.DisplayInfo();
-            doctor2.DisplayInfo();
-            // Test Case 2: Assign rooms to patients
-            Console.WriteLine("\n===== Test Case 2: Room Assignment =====");
-            Room room1 = new Room(202, RoomType.ICU);
-            Room room2 = new Room(203, RoomType.General);
-            patient1.AssignRoom(room1);
-            patient2.AssignRoom(room2);
-            // Display room details
-            Console.WriteLine($"Room {room1.RoomNumber} is occupied: {room1.IsOccupied}");
-            Console.WriteLine($"Room {room2.RoomNumber} is occupied: {room2.IsOccupied}");
-            // Test Case 3: Schedule appointments
-            Console.WriteLine("\n===== Test Case 3: Schedule Appointments =====");
-            Appointment appointment1 = new Appointment(patient1, doctor1, new DateTime(2024, 10,
-           5, 9, 30, 0));
-            appointment1.ScheduleAppointment(new DateTime(2024, 10, 5, 9, 30, 0));
-            appointment1.GetAppointmentDetails();
-            Appointment appointment2 = new Appointment(patient2, doctor2, new DateTime(2024, 10,
-           6, 11, 0, 0));
-            appointment2.ScheduleAppointment(new DateTime(2024, 10, 6, 11, 0, 0));
-            appointment2.GetAppointmentDetails();
-            // Test Case 4: Discharge patients
-            Console.WriteLine("\n===== Test Case 4: Discharge Patients =====");
-            patient1.Discharge();
-            Console.WriteLine($"Patient {patient1.Name} has been discharged. Room { room1.RoomNumber} is now occupied: { room1.IsOccupied}");
-             // Test Case 5: Display doctor-patient details
-            Console.WriteLine("\n===== Test Case 5: Display Doctor-Patient Details =====");
-            doctor1.DisplayInfo();
-            doctor2.DisplayInfo();
+            // Create doctors
+            Doctor doctor1 = new Doctor(1, "Dr. John Smith", 45, Gender.Male,Specialization.Cardiology);
+            Doctor doctor2 = new Doctor(2, "Dr. Alice Brown", 38, Gender.Female,Specialization.Neurology);
+
+            // Create clinics
+            Clinic cardiologyClinic = new Clinic(1, "Cardiology Clinic",Specializations.Cardiology);
+            Clinic neurologyClinic = new Clinic(2, "Neurology Clinic", Specializations.Neurology);
+
+            // Assign doctors to clinics and generate appointment slots (9 AM - 12 PM)
+            doctor1.AssignToClinic(cardiologyClinic, new DateTime(2024, 10, 5), TimeSpan.FromHours(3)); // Expected: Appointments generated for 9 AM, 10 AM, 11 AM
+            doctor2.AssignToClinic(neurologyClinic, new DateTime(2024, 10, 6), TimeSpan.FromHours(3));  // Expected: Appointments generated for 9 AM, 10 AM, 11 AM
+
+            // Create rooms for clinics
+            Room room1 = new Room(101, RoomType.IPR);  // Room for in-patients
+            Room room2 = new Room(102, RoomType.OPR);  // Room for out-patients
+            cardiologyClinic.AddRoom(room1); // Expected: Room 101 added to Cardiology Clinic
+            neurologyClinic.AddRoom(room2);  // Expected: Room 102 added to Neurology Clinic
+
+            // Create patients
+            InPatient inpatient1 = new InPatient(
+                  "Jane Doe",
+                   30,
+                   Gender.Female,
+                   101, 
+                   "Cardiac Arrest",
+                   doctor1,
+                  DateTime.Now
+                   );
+            OutPatient outpatient1 = new OutPatient
+           (
+                "Mark Doe",
+                28,
+                Gender.Male,
+                102,
+                "Migraine",
+                neurologyClinic
+                   );
+                                       // Assign room to in-patient
+            inpatient1.AssignRoom(room1); // Expected: Room 101 becomes occupied
+                                          // Book an appointment for out-patient in Cardiology Clinic
+
+            cardiologyClinic.BookAppointment(outpatient1, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(10)); // Expected: Appointment at 10 AM booked
+
+
         }
     }
 }

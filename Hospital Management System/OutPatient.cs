@@ -10,7 +10,8 @@ namespace Hospital_Management_System
     public class OutPatient :Patient
     {
         public Clinic ClinicAssigned { get; set; }
-        public OutPatient(int PatientID, string Name, int age, Gender gender, string Ailment, Clinic ClinicAssigned) : base(PatientID, Name, age, gender, Ailment)
+        //private Clinic _clinic;
+        public OutPatient( string Name, int age, Gender gender, int PatientID, string Ailment, Clinic ClinicAssigned) : base(PatientID, Name, age, gender, Ailment)
         {
             this.ClinicAssigned = ClinicAssigned;
 
