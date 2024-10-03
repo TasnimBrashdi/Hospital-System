@@ -16,7 +16,7 @@ namespace Hospital_Management_System
             // Create clinics
             Clinic cardiologyClinic = new Clinic(1, "Cardiology Clinic", Specializations.Cardiology);
             Clinic neurologyClinic = new Clinic(2, "Neurology Clinic", Specializations.Neurology);
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             // Assign doctors to clinics and generate appointment slots (9 AM - 12 PM)
             doctor1.AssignToClinic(cardiologyClinic, new DateTime(2024, 10, 5), TimeSpan.FromHours(3)); // Expected: Appointments generated for 9 AM, 10 AM, 11 AM
             doctor2.AssignToClinic(neurologyClinic, new DateTime(2024, 10, 6), TimeSpan.FromHours(3));  // Expected: Appointments generated for 9 AM, 10 AM, 11 AM
@@ -46,7 +46,11 @@ namespace Hospital_Management_System
             cardiologyClinic.DisplayAvailableAppointments();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             cardiologyClinic.BookAppointment(outpatient1, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(10)); // Expected: Appointment at 10 AM booked
-            Console.ForegroundColor = ConsoleColor.Yellow;                                                                            // View doctor's assigned clinics
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            //View available appointments in Cardiology Clinic
+            cardiologyClinic.DisplayAvailableAppointments();// Expected: Show available slots for Dr. John Smith at 9 AM, 11 AM (10 AM is booked)
+            Console.WriteLine();
+
 
         }
     }

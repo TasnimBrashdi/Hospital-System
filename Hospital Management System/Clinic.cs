@@ -40,6 +40,7 @@ namespace Hospital_Management_System
             if (AvailableAppointments.ContainsKey(doctor))
             {
                 // If the doctor exists, add the new appointment to their list
+                //newAppointment.ScheduleAppointment(null, appointmentDay,)
                 AvailableAppointments[doctor].Add(newAppointment);
                 Console.WriteLine($"Availble appointment added for {doctor.Name} at {appointmentDay}");
             }
