@@ -63,8 +63,12 @@ namespace Hospital_Management_System
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             cardiologyClinic.BookAppointment(outpatient1, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(12));
             // Cancel an appointment
-      
+
+
+            //Appointment.CancelAppointment(outpatient1,doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(10));
             //cardiologyClinic.CancelAppointment(new DateTime(2024, 10, 5), TimeSpan.FromHours(10));
+
+
             // Expected: Appointment cancellation message for 10 AM
             Console.WriteLine();
             cardiologyClinic.DisplayAvailableAppointments();

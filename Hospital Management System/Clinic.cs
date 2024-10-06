@@ -34,44 +34,56 @@ namespace Hospital_Management_System
         public void AddAvailableAppointment(Doctor doctor, DateTime appointmentDay, TimeSpan period)
         {
             // Assuming you want to add a new appointment without the time span for simplicity
-            Appointment newAppointment = new Appointment(null, doctor, appointmentDay);
-
+         
+            TimeSpan start =new TimeSpan (9,0,0);
             // Check if the doctor already has a appointments
-            if (AvailableAppointments.ContainsKey(doctor))
+            if (!AvailableAppointments.ContainsKey(doctor))
             {
+                AvailableAppointments[doctor] = new List<Appointment>();
                 // If the doctor exists, add the new appointment to their list
-                //newAppointment.ScheduleAppointment(null, appointmentDay,)
-                AvailableAppointments[doctor].Add(newAppointment);
-                Console.WriteLine($"Availble appointment added for {doctor.Name} at {appointmentDay}");
+                for (int i=0; i <= period.Hours; i++)
+                {
+                    Appointment newAppointment = new Appointment(null, appointmentDay,start.Add(new TimeSpan (i,0,0)));
+                    AvailableAppointments[doctor].Add(newAppointment);
+                    Console.WriteLine($"Availble appointment added for {doctor.Name} at {appointmentDay}");
+                }
+               
             }
             else
             {
                 // If the doctor does not exist, create a new list and add the appointment
-                AvailableAppointments[doctor] = new List<Appointment> { newAppointment };
+                Console.WriteLine("Doctor already have appointment");
             }
 
         }
-        public void BookAppointment(Patient patient, Doctor doctor, DateTime appointmentDay,TimeSpan appointmentTime)
+        public void BookAppointment(Patient patient, Doctor doctor, DateTime appointmentDay, TimeSpan appointmentTime)
         {
+            // Check if there are available appointments for the selected doctor
             if (!AvailableAppointments.ContainsKey(doctor))
             {
-               Console.WriteLine("No Availbale Appointment for doctor");
+                Console.WriteLine($" Sorry, Dr. {doctor.Name} does not have any available appointments at the moment.");
                 return;
-            }
-            Appointment availableAppointment= AvailableAppointments[doctor].Find(app => app.AppointmentDate == appointmentDay.Date && app.AppointmentTime == appointmentTime &&!app.IsBooked);
-            if (availableAppointment == null)
-            {
-
-                Console.WriteLine("No Avalibale Appointment at this Date");
             }
             else
             {
-                availableAppointment.Patient = patient;
-                availableAppointment.ScheduleAppointment(appointmentDay, appointmentTime);
-                //clinic.BookAppointment(this, patient, doctor, appointmentDay, appointmentTime);
-                Console.WriteLine($"Appointment booked for {patient.Name} with  {doctor.Name} on {appointmentDay.ToShortDateString()} at {appointmentTime}.");
+                var availableAppointments = AvailableAppointments[doctor];
+                // Search for the requested appointment
+                foreach (var appointment in availableAppointments)
+                {
+                    if (appointment.AppointmentDate == appointmentDay && appointment.AppointmentTime == appointmentTime && !appointment.IsBooked)
+                    {
+                        // Book the appointment
+                        appointment.Patient = patient;
+                        appointment.IsBooked = true;
+                        appointment.ScheduleAppointment(patient, appointmentDay, appointmentTime);
+                    }
+
+                    Console.WriteLine("Please try another time or day.");
+                }
+
             }
-        }
+            }
+        
         public void DisplayAvailableAppointments()
         {
             foreach (var doctorAppointments in AvailableAppointments)
