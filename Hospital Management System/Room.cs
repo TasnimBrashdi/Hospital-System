@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Hospital_Management_System
 {
-    public class Room
+    public interface IRoomManagement
+    {
+        void OccupyRoom();
+        void VacateRoom();
+        void DisplayRoomInfo();
+        
+
+        }
+    public class Room: IRoomManagement
     {
         public int RoomNumber { get; set; }
         public bool IsOccupied { get; set; }
