@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -33,32 +34,25 @@ namespace Hospital_Management_System
         }
         public void AddAvailableAppointment(Doctor doctor, DateTime appointmentDay, TimeSpan period)
         {
+            TimeSpan startTime = new TimeSpan(9, 0, 0);
             if (!AvailableAppointments.ContainsKey(doctor))
             {
                 AvailableAppointments[doctor] = new List<Appointment>();
+                for (int i = 0; i < period.TotalHours; i++)
+                {
+                    Appointment newAppointment = new Appointment(null, appointmentDay, startTime.Add(new TimeSpan(i, 0, 0)));
+                    newAppointment.ScheduleAppointment(null, appointmentDay, startTime.Add(new TimeSpan(i, 0, 0)),false);
+                    AvailableAppointments[doctor].Add(newAppointment);
+                    Console.WriteLine($"Available appointment added for {doctor.Name} at {startTime.Add(new TimeSpan(i, 0, 0))}.");
+                }
             }
             else
             {
                 // If the doctor does not exist, create a new list and add the appointment
                 Console.WriteLine("Doctor already have appointment");
             }
-            TimeSpan startTime = new TimeSpan(9, 0, 0);
-            for (int i = 0; i < period.TotalHours; i++)
-            {
-                Appointment newAppointment = new Appointment(null, appointmentDay, startTime.Add(new TimeSpan(i, 0, 0)));
-                AvailableAppointments[doctor].Add(newAppointment);
-                Console.WriteLine($"Available appointment added for {doctor.Name} at {startTime.Add(new TimeSpan(i, 0, 0))}.");
-            }
-
-
-
-
-
-
-
-
-           
-
+            
+            
         }
         public void BookAppointment(Patient patient, Doctor doctor, DateTime appointmentDay, TimeSpan appointmentTime)
         {
@@ -70,36 +64,42 @@ namespace Hospital_Management_System
             }
             else
             {
-                var availableAppointments = AvailableAppointments[doctor];
+                List<Appointment> availableAppointments = AvailableAppointments[doctor];
                 // Search for the requested appointment
                 foreach (var appointment in availableAppointments)
                 {
                     if (appointment.AppointmentDate == appointmentDay && appointment.AppointmentTime == appointmentTime && !appointment.IsBooked)
                     {
-                        // Book the appointment
-                        appointment.Patient = patient;
-                        appointment.IsBooked = true;
-                        appointment.ScheduleAppointment(patient, appointmentDay, appointmentTime);
+                        appointment.ScheduleAppointment(patient, appointmentDay, appointmentTime,true);
+                        
+                        Console.WriteLine($"Appointment scheduled for {patient.Name} with  {doctor.Name} on{appointmentDay:MMMM d, yyyy} at {appointmentTime} ");
+                  
                     }
 
-                    Console.WriteLine("Please try another time or day.");
+
                 }
 
             }
+
             }
         
         public void DisplayAvailableAppointments()
         {
-            foreach (var doctorAppointments in AvailableAppointments)
+            
+            foreach (var doctorAppointments in AvailableAppointments.Keys)
             {
-                Doctor doctor = doctorAppointments.Key;
-                List<Appointment> appointments = doctorAppointments.Value;
-                Console.WriteLine($"Available Appointments for {doctor.Name}:");
+                Console.WriteLine($"Available Appointments for {doctorAppointments.Name}:");
+                List<Appointment> appointments = AvailableAppointments[doctorAppointments];
+               
                 foreach (var appointment in appointments)
                 {
                     if (!appointment.IsBooked)
                     {
-                        Console.WriteLine($"Date: {appointment.AppointmentDate}  Time: {appointment.AppointmentTime}");
+                        Console.WriteLine($"Date: {appointment.AppointmentDate:MMMM d, yyyy} {appointment.AppointmentTime} isBooked");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Date: {appointment.AppointmentDate:MMMM d, yyyy} {appointment.AppointmentTime} NotBooked");
                     }
                 }
             }

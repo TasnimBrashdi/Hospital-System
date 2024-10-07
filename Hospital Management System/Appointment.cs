@@ -17,17 +17,17 @@ namespace Hospital_Management_System
         public Appointment(Patient Patient, DateTime AppointmentDate,TimeSpan time)
         {
             this.Patient = Patient;
-            this.Doctor = Doctor;
+           
             this.AppointmentDate = AppointmentDate;
             IsBooked = false;
     
         }
-        public void ScheduleAppointment(Patient patient, DateTime appointmentDate, TimeSpan appointmentTime)
+        public void ScheduleAppointment(Patient patient, DateTime appointmentDate, TimeSpan appointmentTime,bool isBooked)
         {
             Patient = patient;
             AppointmentDate = appointmentDate;
             AppointmentTime = appointmentTime;  
-            IsBooked = true;
+            this.IsBooked = isBooked;
 
         }
         public void CancelAppointment(Patient Patient, Doctor Doctor,DateTime appointmentDate, TimeSpan appointmentTime) {

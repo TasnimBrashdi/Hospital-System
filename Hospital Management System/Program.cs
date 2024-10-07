@@ -47,9 +47,9 @@ namespace Hospital_Management_System
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             // Book an appointment for out-patient in Cardiology Clinic
             cardiologyClinic.BookAppointment(outpatient1, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(10)); // Expected: Appointment at 10 AM booked
-                                                                                                                       // View doctor's assigned clinics
+            Console.ForegroundColor = ConsoleColor.Yellow;                                                                                              // View doctor's assigned clinics
             doctor1.DisplayAssignedClinics(); // Expected: Cardiology Clinic is displayed
-            Console.ForegroundColor = ConsoleColor.Yellow;
+        
             //View available appointments in Cardiology Clinic
             cardiologyClinic.DisplayAvailableAppointments();// Expected: Show available slots for Dr. John Smith at 9 AM, 11 AM (10 AM is booked)
             Console.WriteLine();
@@ -65,14 +65,9 @@ namespace Hospital_Management_System
             // Cancel an appointment
 
 
-            //Appointment.CancelAppointment(outpatient1,doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(10));
-            //cardiologyClinic.CancelAppointment(new DateTime(2024, 10, 5), TimeSpan.FromHours(10));
+            //cardiologyClinic.CancelAppointment(outpatient1, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(10));
 
 
-            // Expected: Appointment cancellation message for 10 AM
-            Console.WriteLine();
-            cardiologyClinic.DisplayAvailableAppointments();
-            // Expected: 10 AM slot available again, 9 AM and 11 AM booked
 
 
 

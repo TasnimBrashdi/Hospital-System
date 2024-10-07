@@ -54,11 +54,7 @@ namespace Hospital_Management_System
 
             Console.WriteLine($"Doctor: {Name} is assigned to the {clinic.ClinicName} for {day:MMMM d, yyyy}, {startTime:hh:mm tt} to {endTime:hh:mm tt}.");
 
-            //for (int i = 0; i < 8; i++)  // Create 8 appointments for 9 AM
-            //{
-            //    DateTime appointmentDateTime = startTime.AddHours(i); // Increment by 1 hour
-            //    clinic.AvailableAppointments[this].Add(new Appointment(null, this, appointmentDateTime));
-            //}
+          
 
         }
         public void DisplayAssignedClinics()
