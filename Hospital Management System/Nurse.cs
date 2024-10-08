@@ -25,5 +25,29 @@ namespace Hospital_Management_System
             this.SpecialNurse = SpecialNurse;
 
         }
+        public void AssistDoctor(Doctor doctor, Patient patient)
+        {
+            Console.WriteLine($"{Name} is assisting Dr. {doctor.Name} with patient {patient.Name}.");
+        }
+        public void CheckVitals(Patient patient)
+        {
+            Console.WriteLine($"Checking vitals for {patient.Name}.");
+        }
+        public void AdministerMedication(Patient patient, string medication)
+        {
+            Console.WriteLine($"{Name} is administering {medication} to {patient.Name}.");
+        }
+        public void DisplayInfo()
+        {
+            Console.WriteLine($"_____Nurse’s information_____");
+            Console.WriteLine($"-Nurse ID: {NurseID}");
+            Console.WriteLine($"-Name: {Name}");
+            Console.WriteLine($"-Age: {Age}");
+            Console.WriteLine($"-Assigned Clinic: {AssignedClinic.ClinicName}");
+            Console.WriteLine($"-Specialization: {SpecialNurse}");
+            Console.WriteLine($"-Assigned Patients: {AssignedPatients.Count}");
+        }
+
+
     }
 }
