@@ -18,6 +18,7 @@ namespace Hospital_Management_System
 
         }
         public override void DisplayInfo()
+
         {
             base.DisplayInfo();
             Console.WriteLine($"Patient ID: {PatientID}, Ailment: {Ailment}, Assigned Clinic: {ClinicAssigned.ClinicName}");
@@ -44,6 +45,11 @@ namespace Hospital_Management_System
             {
                 Console.WriteLine("No upcoming appointments.");
             }
+        }
+    
+    public void FollowUpAppointments()
+        {
+
         }
     }
     

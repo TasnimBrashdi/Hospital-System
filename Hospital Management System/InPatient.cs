@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital_Management_System
 {
-    public class InPatient : Patient
+    public class InPatient : Patient, IInPatientCare
     {
         public Room Room { get; set; }
         public Doctor AssignedDoctor { get; set; }
@@ -40,5 +40,6 @@ namespace Hospital_Management_System
             Console.WriteLine($"Room : {Room} Assign Doctor: {AssignedDoctor}");
 
         }
+
     }
 }

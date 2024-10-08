@@ -7,7 +7,8 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Hospital_Management_System
 {
-    public class Appointment
+
+    public class Appointment : Scheduling, IDisplayInfo
     {
         public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
@@ -32,24 +33,18 @@ namespace Hospital_Management_System
         }
         public void CancelAppointment(Patient Patient, Doctor Doctor,DateTime appointmentDate, TimeSpan appointmentTime) {
      
-            if (Patient != null && Doctor != null)
-            {
+          
                 Patient = null;
                 Doctor = Doctor;
                 AppointmentDate = appointmentDate;
                 AppointmentTime = appointmentTime;
                 IsBooked = false;       
-            }
-            else
-            {
-                Console.WriteLine("No appointment to cancel.");
-            }
-
+          
         
          
 
         }
-        public void DisplayAppointmentDetails() 
+        public void DisplayInfo() 
         {
             if (IsBooked)
             {

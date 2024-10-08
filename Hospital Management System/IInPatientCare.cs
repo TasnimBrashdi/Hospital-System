@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Hospital_Management_System
 {
-    public interface IInPatientCare
+    public interface IInPatientCare: IPatientCare
     {
+        void AssignRoom(Room Room);
+        void Discharge();
+
     }
 }

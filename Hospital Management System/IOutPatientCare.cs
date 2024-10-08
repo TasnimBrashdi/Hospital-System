@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Hospital_Management_System
 {
-    public interface IOutPatientCare
+    public interface IOutPatientCare: IPatientCare
     {
+        void FollowUpAppointments();
     }
 }

@@ -8,6 +8,6 @@ namespace Hospital_Management_System
 {
     public interface IPatientCare
     {
-
+        //void PatientCare();
     }
 }

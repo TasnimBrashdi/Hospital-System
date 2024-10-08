@@ -83,34 +83,27 @@ namespace Hospital_Management_System
             }
 
             }
-        public void cancelapp(Patient patient, Doctor doctor, DateTime appointmentDay, TimeSpan appointmentTime)
+        public void CancelAppointment(Patient patient, Doctor doctor, DateTime appointmentDay, TimeSpan appointmentTime)
         {
             if (!AvailableAppointments.ContainsKey(doctor))
             {
-                Console.WriteLine($" Sorry, Dr. {doctor.Name} does not have any available appointments at the moment.");
+                Console.WriteLine($"Sorry, Dr. {doctor.Name} does not have any available appointments.");
                 return;
             }
-            else
+
+            var availableAppointments = AvailableAppointments[doctor];
+            foreach (var appointment in availableAppointments)
             {
-                List<Appointment> availableAppointments = AvailableAppointments[doctor];
-                // Search for the requested appointment
-                foreach (var appointment in availableAppointments)
+                if (appointment.AppointmentDate == appointmentDay && appointment.AppointmentTime == appointmentTime && appointment.IsBooked)
                 {
-                    if (appointment.AppointmentDate == appointmentDay && appointment.AppointmentTime == appointmentTime && appointment.IsBooked)
-                    {
-                        appointment.ScheduleAppointment(patient, appointmentDay, appointmentTime, true);
-                        appointment.CancelAppointment(null, doctor, appointmentDay, appointmentTime);
-
-                        Console.WriteLine($"Appointment scheduled for {patient.Name} with  {doctor.Name} on{appointmentDay:MMMM d, yyyy} at {appointmentTime} ");
-                        Console.WriteLine("----Canceled-----");
-
-
-                    }
-
-
+                    appointment.CancelAppointment(null, doctor, appointmentDay, appointmentTime);
+                    Console.WriteLine($"Appointment canceled for {patient.Name} with Dr. {doctor.Name} on {appointmentDay:MMMM d, yyyy} at {appointmentTime}.");
+                    return;
                 }
-
             }
+
+            Console.WriteLine("No matching appointment found to cancel.");
+            
         }
 
 
