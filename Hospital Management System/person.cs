@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital_Management_System
 {
-    public class person
+    public class person : IDisplayInfo
     {
     
         public string Name { get; set; }

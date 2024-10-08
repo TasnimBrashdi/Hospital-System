@@ -10,6 +10,7 @@ namespace Hospital_Management_System
     {
         void OccupyRoom();
         void VacateRoom();
-        void DisplayRoomInfo();
+        void DisplayInfo();
+      
     }
 }

@@ -23,7 +23,7 @@ namespace Hospital_Management_System
         {
             IsOccupied = false;
         }
-        public void DisplayRoomInfo()
+        public void DisplayInfo()
         {
             Console.WriteLine(" - - - ICU Information - - - ");
             Console.WriteLine($"ICU Number: {ICUNumber} Is Occupied  {IsOccupied}");

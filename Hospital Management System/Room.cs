@@ -6,15 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hospital_Management_System
 {
-    public interface IRoomManagement
-    {
-        void OccupyRoom();
-        void VacateRoom();
-        void DisplayRoomInfo();
-        
-
-        }
-    public class Room: IRoomManagement
+    public class Room: IRoomManagement,IDisplayInfo
     {
         public int RoomNumber { get; set; }
         public bool IsOccupied { get; set; }
@@ -42,11 +34,12 @@ namespace Hospital_Management_System
             IsOccupied = false;
 
         }
-        public void DisplayRoomInfo()
+        public void DisplayInfo()
         {
             Console.WriteLine(" - - - Room Information - - - ");
             Console.WriteLine($"Room Number: {RoomNumber} \nRoom Type: {R} \nIs Occupied ? {IsOccupied}");
         }
+        
 
     }
 }

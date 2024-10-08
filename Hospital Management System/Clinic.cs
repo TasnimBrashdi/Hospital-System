@@ -8,7 +8,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Hospital_Management_System
 {
-    public class Clinic
+    public class Clinic: IDisplayInfo
     {
         public int ClinicID { get; set; }
         public string ClinicName { get; set; }
@@ -73,7 +73,8 @@ namespace Hospital_Management_System
                         appointment.ScheduleAppointment(patient, appointmentDay, appointmentTime,true);
                         
                         Console.WriteLine($"Appointment scheduled for {patient.Name} with  {doctor.Name} on{appointmentDay:MMMM d, yyyy} at {appointmentTime} ");
-                  
+       
+
                     }
 
 
@@ -82,8 +83,39 @@ namespace Hospital_Management_System
             }
 
             }
-        
-        public void DisplayAvailableAppointments()
+        public void cancelapp(Patient patient, Doctor doctor, DateTime appointmentDay, TimeSpan appointmentTime)
+        {
+            if (!AvailableAppointments.ContainsKey(doctor))
+            {
+                Console.WriteLine($" Sorry, Dr. {doctor.Name} does not have any available appointments at the moment.");
+                return;
+            }
+            else
+            {
+                List<Appointment> availableAppointments = AvailableAppointments[doctor];
+                // Search for the requested appointment
+                foreach (var appointment in availableAppointments)
+                {
+                    if (appointment.AppointmentDate == appointmentDay && appointment.AppointmentTime == appointmentTime && appointment.IsBooked)
+                    {
+                        appointment.ScheduleAppointment(patient, appointmentDay, appointmentTime, true);
+                        appointment.CancelAppointment(null, doctor, appointmentDay, appointmentTime);
+
+                        Console.WriteLine($"Appointment scheduled for {patient.Name} with  {doctor.Name} on{appointmentDay:MMMM d, yyyy} at {appointmentTime} ");
+                        Console.WriteLine("----Canceled-----");
+
+
+                    }
+
+
+                }
+
+            }
+        }
+
+
+
+        public void DisplayInfo()
         {
             
             foreach (var doctorAppointments in AvailableAppointments.Keys)

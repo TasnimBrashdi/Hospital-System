@@ -31,12 +31,14 @@ namespace Hospital_Management_System
 
         }
         public void CancelAppointment(Patient Patient, Doctor Doctor,DateTime appointmentDate, TimeSpan appointmentTime) {
-
+     
             if (Patient != null && Doctor != null)
             {
-                Console.WriteLine($"Patient's Name: {Patient.Name}, Doctor's Name: {Doctor.Name}, Appointment Date: {AppointmentDate}");
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Canceled");
+                Patient = null;
+                Doctor = Doctor;
+                AppointmentDate = appointmentDate;
+                AppointmentTime = appointmentTime;
+                IsBooked = false;       
             }
             else
             {
@@ -44,11 +46,7 @@ namespace Hospital_Management_System
             }
 
         
-            Patient = null;
-            Doctor = null;
-            AppointmentDate = null;
-            AppointmentTime=null; 
-            IsBooked = false;
+         
 
         }
         public void DisplayAppointmentDetails() 

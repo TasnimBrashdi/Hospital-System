@@ -44,7 +44,7 @@ namespace Hospital_Management_System
         {
             return OccupiedBeds > 0;
         }
-        public void DisplayRoomInfo()
+        public void DisplayInfo()
         {
             Console.WriteLine(" - - - Ward Information - - - ");
             Console.WriteLine($"Ward Number: {WardNumber} \nBed Count: {BedCount} \nOccupied Beds: {OccupiedBeds}");
