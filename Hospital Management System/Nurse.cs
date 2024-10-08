@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hospital_Management_System
 {
-    public class Nurse : person
+    public class Nurse : person, IDisplayInfo, IPatientCare
     {
         public int NurseID;
         public Clinic AssignedClinic;
@@ -27,6 +27,7 @@ namespace Hospital_Management_System
         }
         public void AssistDoctor(Doctor doctor, Patient patient)
         {
+            doctor.AddPatient(patient);
             Console.WriteLine($"{Name} is assisting Dr. {doctor.Name} with patient {patient.Name}.");
         }
         public void CheckVitals(Patient patient)

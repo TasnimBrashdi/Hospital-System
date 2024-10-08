@@ -65,10 +65,10 @@ namespace Hospital_Management_System
             // Cancel an appointment
 
             Console.ForegroundColor = ConsoleColor.Red;
-            cardiologyClinic.cancelapp(outpatient1, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(10));
-            cardiologyClinic.cancelapp(outpatient1, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(1));
+            cardiologyClinic.CancelAppointment(outpatient1, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(10));
+            cardiologyClinic.CancelAppointment(outpatient1, doctor1, new DateTime(2024, 10, 5), TimeSpan.FromHours(1));
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.ForegroundColor = ConsoleColor.Gray;
+        
 
 
 
